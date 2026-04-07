@@ -19,6 +19,8 @@ python network_scanner.py -n 10.0.0.0/16 -c 100 --rate 120 -t 1000 --tcp-fallbac
 
 # 续扫
 python network_scanner.py -n 10.0.0.0/16 --resume -o alive.txt
+
+
 ## 完整参数说明
 
 | 参数                   | 默认值      | 说明                                                      |
