@@ -14,18 +14,18 @@
 | `--force`              | 关闭        | 跳过大网段二次确认提示，适合脚本自动化                    |
 
 # 标准 B 段扫描（推荐参数，平稳约 6-12 分钟）
-python network_scanner.py -n 10.10.0.0/16 -c 150 --rate 200 -o alive.txt
+python tance.py -n 10.10.0.0/16 -c 150 --rate 200 -o alive.txt
 
 # 中途 Ctrl+C 中断后，下次续扫（自动跳过已扫部分）
-python network_scanner.py -n 10.10.0.0/16 -c 150 --rate 200 -o alive.txt --resume
+python tance.py -n 10.10.0.0/16 -c 150 --rate 200 -o alive.txt --resume
 
 # B 段 + 排除网关段 + 开启 TCP 备用探测
-python network_scanner.py -n 192.168.0.0/16 ^
+python tance.py -n 192.168.0.0/16 ^
     -e 192.168.0.0/24 192.168.255.0/24 ^
     -c 200 --rate 300 --tcp-fallback -o result.txt
 
 # 跳过确认（自动化脚本调用）
-python network_scanner.py -n 10.10.0.0/16 --force -c 150 --rate 200 -o alive.txt
+python tance.py -n 10.10.0.0/16 --force -c 150 --rate 200 -o alive.txt
 
 
 
