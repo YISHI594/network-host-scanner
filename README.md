@@ -26,3 +26,4 @@ python network_scanner.py -n 192.168.0.0/16 ^
 
 # 跳过确认（自动化脚本调用）
 python network_scanner.py -n 10.10.0.0/16 --force -c 150 --rate 200 -o alive.txt
+<img width="1701" height="765" alt="image" src="https://github.com/user-attachments/assets/71eee0a1-5e1d-40d1-add9-74a66b05eceb" />
