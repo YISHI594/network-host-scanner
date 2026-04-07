@@ -1,3 +1,24 @@
+# 网络存活主机扫描器
+Windows 平台专用、高性能、防漏扫内网主机探测工具
+
+## 功能
+- ICMP Ping 探测 + TCP 端口兜底，解决禁 ping 漏扫
+- 自动重试机制，大幅降低丢包导致的漏 IP
+- 大网段支持（B段 /16 轻松扫描）
+- 断点续扫，意外退出不重来
+- 速率限制 + 并发控制，稳定不卡顿
+- 结果实时写入文件，不丢失数据
+
+## 快速开始（最稳不漏扫）
+```bash
+# C段
+python network_scanner.py -n 192.168.1.0/24 -c 100 --rate 120 -t 1000 --tcp-fallback -o alive.txt
+
+# B段
+python network_scanner.py -n 10.0.0.0/16 -c 100 --rate 120 -t 1000 --tcp-fallback -o alive.txt
+
+# 续扫
+python network_scanner.py -n 10.0.0.0/16 --resume -o alive.txt
 ## 完整参数说明
 
 | 参数                   | 默认值      | 说明                                                      |
@@ -13,19 +34,7 @@
 | `--resume`             | 关闭        | **断点续扫**，跳过上次已扫 IP（须配合 `-o`）              |
 | `--force`              | 关闭        | 跳过大网段二次确认提示，适合脚本自动化                    |
 
-# 标准 B 段扫描（推荐参数，平稳约 6-12 分钟）
-python tance.py -n 10.10.0.0/16 -c 150 --rate 200 -o alive.txt
 
-# 中途 Ctrl+C 中断后，下次续扫（自动跳过已扫部分）
-python tance.py -n 10.10.0.0/16 -c 150 --rate 200 -o alive.txt --resume
-
-# B 段 + 排除网关段 + 开启 TCP 备用探测
-python tance.py -n 192.168.0.0/16 ^
-    -e 192.168.0.0/24 192.168.255.0/24 ^
-    -c 200 --rate 300 --tcp-fallback -o result.txt
-
-# 跳过确认（自动化脚本调用）
-python tance.py -n 10.10.0.0/16 --force -c 150 --rate 200 -o alive.txt
 
 
 
